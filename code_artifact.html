@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ماتريال Algorithm analysis and design - الميدتيرم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0b1120 0%, #0f172a 100%);
+      color: #f1f5f9;
+      min-height: 100vh;
+      padding: 32px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 20px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title i {
+      color: #38bdf8;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .link-card:hover {
+      background: #273549;
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    .link-card.featured {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(30, 41, 59, 0.9) 100%);
+      border: 1px solid #0284c7;
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #38bdf8;
+    }
+
+    .link-card.featured .icon-box {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    .card-text .name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-text .rec-tag {
+      background: #f59e0b;
+      color: #0f172a;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .card-text .subtext {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .arrow {
+      color: #64748b;
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+
+    .link-card:hover .arrow {
+      color: #38bdf8;
+      transform: translateX(-4px);
+    }
+
+    /* Exams Grid */
+    .exams-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 480px) {
+      .exams-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .exam-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .exam-card:hover {
+      background: #273549;
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      width: 100%;
+      margin-top: 24px;
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #0369a1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="badge">
+        <i class="fa-solid fa-graduation-cap"></i> مقرر الميدتيرم: 5 محاضرات
+      </div>
+      <h1 class="title">Algorithm Analysis & Design</h1>
+      <p class="subtitle">جميع روابط ومصادر المادة للميدتيرم</p>
+    </div>
+
+    <!-- Slides -->
+    <div class="section-title"><i class="fa-solid fa-folder"></i> ملفات الشرح</div>
+    <a href="https://drive.google.com/drive/folders/1TMBErkz0-Lpo0li8-u7b3CWMP4gadFAJ?usp=drive_link" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="card-text">
+          <div class="name">ملفات وسلايدات الشرح</div>
+          <div class="subtext">Google Drive</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <!-- Primary Videos -->
+    <div class="section-title"><i class="fa-solid fa-video"></i> فيديوهات الشرح</div>
+    
+    <a href="https://drive.google.com/drive/folders/1Hd7LUEZYkGPO_Uc7EA5O-2EYbNSHgJWj?usp=drive_link" target="_blank" class="link-card featured">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-solid fa-star"></i></div>
+        <div class="card-text">
+          <div class="name">
+            شرح د/ نهى
+            <span class="rec-tag">أرشحها ⭐</span>
+          </div>
+          <div class="subtext">Google Drive</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <a href="https://bsunew-my.sharepoint.com/personal/heba_h_ali_fcis_bsu_edu_eg/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fheba%5Fh%5Fali%5Ffcis%5Fbsu%5Fedu%5Feg%2FDocuments%2FAlgorithms%20BSU%2FRecorded%20Lectures&ga=1" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-solid fa-cloud"></i></div>
+        <div class="card-text">
+          <div class="name">شرح د/ هبة</div>
+          <div class="subtext">OneDrive</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <!-- Other Explanations -->
+    <div class="section-title"><i class="fa-solid fa-shuffle"></i> شروحات تانية</div>
+
+    <a href="https://drive.google.com/drive/folders/1qhh426VDpA9hLU0xD4igIxbyyg8OdE1F?usp=drive_link" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-brands fa-google-drive"></i></div>
+        <div class="card-text">
+          <div class="name">شرح د/ وائل</div>
+          <div class="subtext">Google Drive</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <a href="https://youtube.com/playlist?list=PL7snZ0LSsq3gecEYOOILo_E7ZJMiGHMrH&si=NBBN68-bWq4r_0lC" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box" style="color: #ef4444;"><i class="fa-brands fa-youtube"></i></div>
+        <div class="card-text">
+          <div class="name">شرح بديل</div>
+          <div class="subtext">YouTube Playlist</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <!-- Summary & Book -->
+    <div class="section-title"><i class="fa-solid fa-book"></i> الملخص والكتاب</div>
+
+    <a href="https://drive.google.com/file/d/1-nDn_GfieMs6N9lxQEiKx6xTtP1ojupk/view?usp=drive_link" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-solid fa-file-lines"></i></div>
+        <div class="card-text">
+          <div class="name">ملخص</div>
+          <div class="subtext">Google Drive PDF</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1nYC14lIXxPPyOI9AF05TrPIqJDFKaQD_/view?usp=drive_link" target="_blank" class="link-card">
+      <div class="card-left">
+        <div class="icon-box"><i class="fa-solid fa-book-open"></i></div>
+        <div class="card-text">
+          <div class="name">كتاب مهم للي فاهم</div>
+          <div class="subtext">أجزاء الـ Exercises وحلولها</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-left arrow"></i>
+    </a>
+
+    <!-- Exams -->
+    <div class="section-title"><i class="fa-solid fa-pen-to-square"></i> درايفات الامتحانات</div>
+    <div class="exams-grid">
+      <a href="https://drive.google.com/drive/folders/1UGdmNQwNSrjQ-WBzLQq12qfHJ4Pegvvk?usp=drive_link" target="_blank" class="exam-card">
+        <span><i class="fa-regular fa-folder me-2"></i> درايف امتحانات (1)</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1BHjehcCt7LAgo6OM8kIYb8EgJ4Jxhk-D?usp=drive_link" target="_blank" class="exam-card">
+        <span><i class="fa-regular fa-folder me-2"></i> درايف تاني (2)</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1a9ttTOy4AbjiQ9NRhyClwkSmGhnAXkKo?usp=drive_link" target="_blank" class="exam-card">
+        <span><i class="fa-regular fa-folder me-2"></i> درايف تالت (3)</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1U4heSh2ojuU5FGV6HbPZeER65bpbzswB?usp=drive_link" target="_blank" class="exam-card">
+        <span><i class="fa-regular fa-folder me-2"></i> درايف رابع (4)</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+  <script>
+    const textToCopy = `Algorithm analysis and design
+علينا خمس محاضرات للميد
+
+ملفات الشرح 
+https://drive.google.com/drive/folders/1TMBErkz0-Lpo0li8-u7b3CWMP4gadFAJ?usp=drive_link
+
+فيديوهات الشرح
+
+شرح د هبة 
+https://bsunew-my.sharepoint.com/personal/heba_h_ali_fcis_bsu_edu_eg/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fheba%5Fh%5Fali%5Ffcis%5Fbsu%5Fedu%5Feg%2FDocuments%2FAlgorithms%20BSU%2FRecorded%20Lectures&ga=1
+
+شرح د نهي (ارشحها)
+https://drive.google.com/drive/folders/1Hd7LUEZYkGPO_Uc7EA5O-2EYbNSHgJWj?usp=drive_link
+
+شروحات تانيه 
+
+شرح د وائل 
+https://drive.google.com/drive/folders/1qhh426VDpA9hLU0xD4igIxbyyg8OdE1F?usp=drive_link
+
+بديل 
+https://youtube.com/playlist?list=PL7snZ0LSsq3gecEYOOILo_E7ZJMiGHMrH&si=NBBN68-bWq4r_0lC
+
+ملخص 
+https://drive.google.com/file/d/1-nDn_GfieMs6N9lxQEiKx6xTtP1ojupk/view?usp=drive_link
+
+كتاب مهم للي فاهم (اجزاء ال Exercises)
+https://drive.google.com/file/d/1nYC14lIXxPPyOI9AF05TrPIqJDFKaQD_/view?usp=drive_link
+
+درايف امتحانات 
+https://drive.google.com/drive/folders/1UGdmNQwNSrjQ-WBzLQq12qfHJ4Pegvvk?usp=drive_link
+
+درايف تاني 
+https://drive.google.com/drive/folders/1BHjehcCt7LAgo6OM8kIYb8EgJ4Jxhk-D?usp=drive_link
+
+درايف تالت 
+https://drive.google.com/drive/folders/1a9ttTOy4AbjiQ9NRhyClwkSmGhnAXkKo?usp=drive_link
+
+درايف رابع
+https://drive.google.com/drive/folders/1U4heSh2ojuU5FGV6HbPZeER65bpbzswB?usp=drive_link`;
+
+  </script>
+</body>
+</html>
